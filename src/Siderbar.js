@@ -1,15 +1,31 @@
 import { Avatar, IconButton } from "@material-ui/core";
-import React from "react";
-import "./Sidebar.css";
+import { selectUser } from "./features/userSlice";
+import { useSelector } from "react-redux";
+import db, { auth } from "./firebase";
+import React, { useEffect, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
 import SidebarChat from "./SidebarChat";
-import { selectUser } from "./features/userSlice";
-import { useSelector } from "react-redux";
-import { auth } from "./firebase";
+import "./Sidebar.css";
+import { ChangeHistorySharp } from "@material-ui/icons";
 
 function Siderbar() {
     const user = useSelector(selectUser);
+
+    //keep track of chats
+    const [chats, setChats] = useState([])
+
+    useEffect(() => {
+        db.collection("chats").onSnapshot((snapshot)=>
+            setChats(
+                snapshot.docs.map((doc) => ({
+                id: doc.id,
+                data: doc.data(),
+            }))
+            ) 
+        ); 
+    }, [])
+
     return (
         <div className="sidebar">
             <div className= "sidebar__header">
@@ -29,11 +45,10 @@ function Siderbar() {
             </div>
 
             <div className= "sidebar__chats">
-                <SidebarChat/>
-                <SidebarChat/>
-                <SidebarChat/>
-                <SidebarChat/>
-                
+                {chats.map(({id, data: {chatName}}) => (
+                   <SidebarChat key={id} id={id} chatName={chatName}/> 
+                ))}
+
             </div>
         </div>
     )
