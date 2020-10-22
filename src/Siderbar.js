@@ -6,14 +6,14 @@ import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
 
 function Siderbar() {
     return (
-        <div>
+        <div className="sidebar">
             <div className= "sidebar__header">
-                <Avatar  />
+                <Avatar className="sidebar__avatar" />
                 <div className="sidebar__input">
                     <SearchIcon/>
                     <input placeholder="Search"/>
                 </div>
-                <IconButton>
+                <IconButton variant="outlined" className="sidebar__inputButton">
                     <RateReviewOutlinedIcon />
                 </IconButton>
                 
