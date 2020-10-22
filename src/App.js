@@ -6,8 +6,6 @@ import Imessage from './Imessage';
 function App() {
   return (
     <div className="app">
-      <h1>This is page</h1>
-    
       <Imessage/>
     </div>
   );
