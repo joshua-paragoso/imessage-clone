@@ -1,6 +1,21 @@
-import React from 'react'
+import { IconButton } from '@material-ui/core';
+import MicNoneIcon from '@material-ui/icons/MicNone';
+import React, { useState } from 'react'
 import "./Chat.css";
 function Chat() {
+
+    const [input, setInput] = useState("");
+    
+    const sendMessage = event => {
+        event.preventDefault();
+
+        //Firebase magic 
+
+        //after sending message to be an empty string  
+        setInput("");
+
+    };
+
     return (
         <div className="chat">
 
@@ -13,6 +28,22 @@ function Chat() {
             {/* chat messages*/}
 
             {/*chat input*/}
+            <div className="chat__input">
+                <form>
+                    <input 
+                        value={input} 
+                        onChange= {(event) => setInput(event.target.value)}
+                        placeholder="iMessage" 
+                        type="text"
+                    />
+                    <button onClick={sendMessage}> Send message</button>
+                </form>
+
+                <IconButton>
+                    <MicNoneIcon className="chat__mic" />
+                </IconButton>
+                
+            </div>
         </div>
     )
 }
