@@ -15,7 +15,9 @@ function Siderbar() {
             <div className= "sidebar__header">
                 <Avatar 
                     onClick ={() => auth.signOut()}
-                    src={user.photo} className="sidebar__avatar" />
+                    src={user.photo} 
+                    className="sidebar__avatar" 
+                />
                 <div className="sidebar__input">
                     <SearchIcon/>
                     <input placeholder="Search"/>
