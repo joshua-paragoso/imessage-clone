@@ -24,7 +24,18 @@ function Siderbar() {
             }))
             ) 
         ); 
-    }, [])
+    }, []);
+
+    const addChat = () => {
+        //add a pop out for adding chats
+        const chatName = prompt('Please enter a chat name');
+
+        if(chatName){
+            db.collection('chats').add({
+            chatName: chatName,
+        });
+        }
+    };
 
     return (
         <div className="sidebar">
@@ -39,7 +50,7 @@ function Siderbar() {
                     <input placeholder="Search"/>
                 </div>
                 <IconButton variant="outlined" className="sidebar__inputButton">
-                    <RateReviewOutlinedIcon />
+                    <RateReviewOutlinedIcon onClick={addChat} />
                 </IconButton>
                 
             </div>
