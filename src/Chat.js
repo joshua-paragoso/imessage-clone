@@ -6,7 +6,8 @@ import Message from "./Message";
 function Chat() {
 
     const [input, setInput] = useState("");
-   
+    //used to keep track of messages
+    const [messages, setMessages] = useState([]);
     const sendMessage = event => {
         event.preventDefault();
 
