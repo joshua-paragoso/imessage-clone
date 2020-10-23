@@ -1,11 +1,17 @@
 import { IconButton } from '@material-ui/core';
 import MicNoneIcon from '@material-ui/icons/MicNone';
 import React, { useState } from 'react'
+import {selectChatName} from "./features/chatSlice";
+import {useSelector } from "react-redux";
 import "./Chat.css";
 import Message from "./Message";
 function Chat() {
 
     const [input, setInput] = useState("");
+
+    //used to keep track of chats
+    const chatName = useSelector(selectChatName);
+
     //used to keep track of messages
     const [messages, setMessages] = useState([]);
     const sendMessage = event => {
@@ -23,7 +29,7 @@ function Chat() {
 
             {/*chat header*/}
                 <div className="chat__header">
-                    <h4>To: <span className="chat__name"> Josh </span></h4>
+                    <h4>To: <span className="chat__name"> {chatName} </span></h4>
                     <strong> Details</strong>
                 </div>
 
