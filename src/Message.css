@@ -15,3 +15,11 @@
     margin: 10px;
     margin-right: auto;
 }
+
+.message > small {
+    color: gray;
+    position: absolute;
+    font-size:  8px;
+    bottom: -5px;
+    right: 0;
+}
