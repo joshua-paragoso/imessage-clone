@@ -1,0 +1,16 @@
+import { Avatar } from '@material-ui/core';
+// import { Avatar } from "@material-ui/core";
+import React from 'react';
+import "./Message.css";
+
+function Message({id, contents}) {
+    return (
+        <div className="message">
+            <Avatar/>
+            <p> this is a message</p>
+            <small>timestamp</small>
+        </div>
+    );
+}
+
+export default Message
