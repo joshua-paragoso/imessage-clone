@@ -6,7 +6,12 @@ import {useSelector } from "react-redux";
 import "./Chat.css";
 import Message from "./Message";
 import db from './firebase';
+import firebase from "firebase";
+import userEvent from '@testing-library/user-event';
+import { selectUser } from './features/userSlice';
 function Chat() {
+
+    const user = useSelector(selectUser);
 
     const [input, setInput] = useState("");
 
@@ -39,7 +44,15 @@ function Chat() {
         event.preventDefault();
 
         //Firebase magic 
-
+        //go into collection and based on the chatId retrieve messages
+        db.collection('chats').doc(chatId).collection("messages").add({
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            message: input,
+            uid: user.id,
+            photo: user.photo,
+            email: user.email,
+            displayName: user.displayName,
+        });
         //after sending message to be an empty string  
         setInput("");
 
