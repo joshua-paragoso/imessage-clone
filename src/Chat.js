@@ -48,7 +48,7 @@ function Chat() {
         db.collection('chats').doc(chatId).collection("messages").add({
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             message: input,
-            uid: user.id,
+            uid: user.uid,
             photo: user.photo,
             email: user.email,
             displayName: user.displayName,
