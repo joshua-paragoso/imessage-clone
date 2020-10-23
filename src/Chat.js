@@ -28,9 +28,10 @@ function Chat() {
                     id: doc.id,
                     data: doc.data(),
                 })))
-            ))
+            ));
         }
-    }, [chatId])
+    }, [chatId]);
+
     const sendMessage = event => {
         event.preventDefault();
 
@@ -52,7 +53,8 @@ function Chat() {
 
             {/* chat messages*/}
             <div className="chat__messages">
-                <Message />
+                {messages.map (({id, data}) => (<Message key={id} contents={data} />
+                ))}
                 
             </div>
 
