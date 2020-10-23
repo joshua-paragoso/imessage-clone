@@ -1,10 +1,11 @@
 import { IconButton } from '@material-ui/core';
 import MicNoneIcon from '@material-ui/icons/MicNone';
-import React, { useState } from 'react'
-import {selectChatName} from "./features/chatSlice";
+import React, { useEffect, useState } from 'react'
+import {selectChatId, selectChatName} from "./features/chatSlice";
 import {useSelector } from "react-redux";
 import "./Chat.css";
 import Message from "./Message";
+import db from './firebase';
 function Chat() {
 
     const [input, setInput] = useState("");
@@ -14,6 +15,22 @@ function Chat() {
 
     //used to keep track of messages
     const [messages, setMessages] = useState([]);
+    
+    //get chatId
+    const chatId = useSelector(selectChatId);
+
+    useEffect(() => {
+        //got into chatroom and bring the messages from that chat
+        if( chatId){
+            db.collection('chats').docs(chatId).collection('messages')
+            .orderBy('timestamp', 'desc').onSnapshot(snapshot => (
+                setMessages(snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    data: doc.data(),
+                })))
+            ))
+        }
+    }, [chatId])
     const sendMessage = event => {
         event.preventDefault();
 
