@@ -21,9 +21,12 @@ function Chat() {
 
     useEffect(() => {
         //got into chatroom and bring the messages from that chat
-        if( chatId){
-            db.collection('chats').docs(chatId).collection('messages')
-            .orderBy('timestamp', 'desc').onSnapshot(snapshot => (
+        if(chatId){
+            db.collection('chats')
+            .doc(chatId)
+            .collection('messages')
+            .orderBy('timestamp', 'desc')
+            .onSnapshot(snapshot => (
                 setMessages(snapshot.docs.map(doc => ({
                     id: doc.id,
                     data: doc.data(),
@@ -53,8 +56,8 @@ function Chat() {
 
             {/* chat messages*/}
             <div className="chat__messages">
-                {messages.map (({id, data}) => (<Message key={id} contents={data} />
-                ))}
+                {messages.map (({id, data}) => (
+                    <Message key={id} contents={data} />))}
                 
             </div>
 
