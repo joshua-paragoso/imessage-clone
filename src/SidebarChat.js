@@ -5,6 +5,7 @@ import React, {useState} from 'react';
 import "./SidebarChat.css";
 import db from './firebase';
 import { useEffect } from "react";
+import * as timeago from 'timeago.js';
 
 function SidebarChat({id, chatName}) {
     const dispatch = useDispatch();
@@ -38,7 +39,7 @@ function SidebarChat({id, chatName}) {
             <div className="sidebarChat__info">
                 <h3>{chatName}</h3>
                 <p>{chatInfo[0]?.message}</p>
-                <small>{new Date(chatInfo[0]?.timestamp?.toDate()).toLocaleString()}</small>
+                <small>{timeago.format(new Date(chatInfo[0]?.timestamp?.toDate()).toLocaleString())}</small>
             </div>
         </div>
     )
